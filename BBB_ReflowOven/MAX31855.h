@@ -29,10 +29,11 @@ namespace reflowOven {
 		double JunctionTempC;
 
 		enum errorType {
-			NONE = 0,
-			OC = 1,
-			SCG = 2,
-			SCV = 3
+			NONE,
+			OC,
+			SCG,
+			SCV, 
+			SPI
 		};
 
 		errorType readError;

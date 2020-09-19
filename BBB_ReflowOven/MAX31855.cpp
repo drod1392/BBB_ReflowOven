@@ -31,13 +31,14 @@ namespace reflowOven {
 		CS->setValue(HIGH);
 
 		if (checkFault() < 0) {
-			cout << "Read Error: ";
+			/*cout << "Read Error: ";
 			if(readError == errorType::OC)
 				cout << "OPEN CIRCUIT Fault" << endl;
 			if (readError == errorType::SCG)
 				cout << "SHORT TO GND Fault" << endl;
 			if (readError == errorType::SCV)
-				cout << "SHORT TO VCC Fault" << endl;
+				cout << "SHORT TO VCC Fault" << endl;*/
+			calculateJunctionTemp();
 			return -1;
 
 		}
@@ -128,6 +129,11 @@ namespace reflowOven {
 		if (!(RawData & FAULT_BIT)) {
 			readError = errorType::NONE;
 			return 0;
+		}
+
+		if (RawData = 0xFFFFFFFF) {
+			readError = errorType::SPI;
+			return -1;
 		}
 
 		if (RawData & FAULT_OC_BIT)
