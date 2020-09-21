@@ -77,6 +77,7 @@
   <ItemGroup>
     <ClCompile Include="BusDevice.cpp" />
     <ClCompile Include="GPIO.cpp" />
+    <ClCompile Include="I2CDevice.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MAX31855.cpp" />
     <ClCompile Include="SPIDevice.cpp" />
@@ -84,6 +85,7 @@
   <ItemGroup>
     <ClInclude Include="BusDevice.h" />
     <ClInclude Include="GPIO.h" />
+    <ClInclude Include="I2CDevice.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="MAX31855.h" />
     <ClInclude Include="SPIDevice.h" />

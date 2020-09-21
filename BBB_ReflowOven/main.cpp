@@ -16,8 +16,11 @@ int main() {
 	MAX31855 Temp1(spi_data, spi_clk, thermo1_cs);
 	MAX31855 Temp2(spi_data, spi_clk, thermo2_cs);
 
+	I2CDevice display(1, 0x2E);
+
 	cout << "Begin" << endl;
 	while(true) {
+		display.write('A');
 
 		if (Temp1.ReadTemp() < 0) {
 			cout << "TEMP1 - Read Error" << endl;
