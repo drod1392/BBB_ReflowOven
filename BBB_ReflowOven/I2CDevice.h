@@ -28,6 +28,10 @@
 #define BBB_I2C_0 "/dev/i2c-0"
 #define BBB_I2C_1 "/dev/i2c-1"
 
+#include <string.h>
+
+using namespace std;
+
 namespace exploringBB {
 
 	/**
@@ -43,6 +47,7 @@ namespace exploringBB {
 		I2CDevice(unsigned int bus, unsigned int device);
 		virtual int open();
 		virtual int write(unsigned char value);
+		virtual int writeArray(char* value, int len);
 		virtual unsigned char readRegister(unsigned int registerAddress);
 		virtual unsigned char* readRegisters(unsigned int number, unsigned int fromAddress = 0);
 		virtual int writeRegister(unsigned int registerAddress, unsigned char value);

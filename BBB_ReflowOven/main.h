@@ -4,6 +4,7 @@
 #include "SPIDevice.h"
 #include "I2CDevice.h"
 #include "MAX31855.h"
+#include "MatrixOrbital_LCD2041.h"
 #include <iostream>
 #include <unistd.h>
 

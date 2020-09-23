@@ -32,7 +32,8 @@
 #include<sys/ioctl.h>
 #include<linux/i2c.h>
 #include<linux/i2c-dev.h>
-using namespace std;
+//#include <string.h>
+//using namespace std;
 
 #define HEX(x) setw(2) << setfill('0') << hex << (int)(x)
 
@@ -80,7 +81,7 @@ namespace exploringBB {
 
 	int I2CDevice::writeRegister(unsigned int registerAddress, unsigned char value) {
 		unsigned char buffer[2];
-		buffer[0] = registerAddress;
+		buffer[0] = (unsigned char) registerAddress;
 		buffer[1] = value;
 		if (::write(this->file, buffer, 2) != 2) {
 			perror("I2C: Failed write to the device\n");
@@ -105,13 +106,27 @@ namespace exploringBB {
 		return 0;
 	}
 
+	/** RODRIGUEZ - ADDED
+	 * Write muliple values to the I2C device. 
+	 * @param value the buffer to write to the device
+	 * @return 1 on failure to write, 0 on success.
+	 */
+	//int I2CDevice::writeArray(unsigned char value[], int len) {
+	int I2CDevice::writeArray(char* value, int len) {
+		if (::write(this->file, value, len) != len) {
+			perror("I2C: Failed to write to the device\n");
+			return 1;
+		}
+		return 0;
+	}
+
 	/**
 	 * Read a single register value from the address on the device.
 	 * @param registerAddress the address to read from
 	 * @return the byte value at the register address.
 	 */
 	unsigned char I2CDevice::readRegister(unsigned int registerAddress) {
-		this->write(registerAddress);
+		this->write((unsigned char) registerAddress);
 		unsigned char buffer[1];
 		if (::read(this->file, buffer, 1) != 1) {
 			perror("I2C: Failed to read in the value.\n");
@@ -129,7 +144,7 @@ namespace exploringBB {
 	 * @return a pointer of type unsigned char* that points to the first element in the block of registers
 	 */
 	unsigned char* I2CDevice::readRegisters(unsigned int number, unsigned int fromAddress) {
-		this->write(fromAddress);
+		this->write((unsigned char) fromAddress);
 		unsigned char* data = new unsigned char[number];
 		if (::read(this->file, data, number) != (int)number) {
 			perror("IC2: Failed to read in the full buffer.\n");
