@@ -131,7 +131,7 @@ namespace reflowOven {
 			return 0;
 		}
 
-		if (RawData = 0xFFFFFFFF) {
+		if (RawData == 0xFFFFFFFF) {
 			readError = errorType::SPI;
 			return -1;
 		}

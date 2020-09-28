@@ -24,7 +24,7 @@ namespace reflowOven {
 		GPIO* SCLK;
 		GPIO* CS;
 
-		int RawData;
+		unsigned int RawData;
 		double ThermoTempC;
 		double JunctionTempC;
 
